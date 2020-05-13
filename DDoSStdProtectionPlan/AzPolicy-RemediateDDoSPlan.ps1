@@ -39,10 +39,10 @@
 
 
 .NOTES
-	Created By: Eric Yew - OLIKKA
-	LAST EDIT: Jan 30, 2020
-	    By: Eric Yew
-	SOURCE: https://github.com/Olikka/Azure-Policy/
+    Created By: Eric Yew - OLIKKA
+    LAST EDIT: Jan 30, 2020
+      By: Eric Yew
+    SOURCE: https://github.com/Olikka/Azure-Policy/blob/master/DDoSStdProtectionPlan/AzPolicy-RemediateDDoSPlan.ps1
 #>
 
 param(
