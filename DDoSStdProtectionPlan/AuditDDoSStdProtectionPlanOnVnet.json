@@ -1,0 +1,58 @@
+{
+  "properties": {
+    "displayName": "Audit DDoS Std Protection Plan On Vnet",
+    "policyType": "Custom",
+    "mode": "All",
+    "description": "Audit DDoS Standard Protection Plan on virtual networks.",
+    "parameters": {
+      "DDoSPlan": {
+        "type": "String",
+        "metadata": {
+          "displayName": "DDoS Protection Plan Resource ID",
+          "description": "Enter the full resourceID for the DDoS Protection Plan"
+        }
+      },
+      "Location": {
+        "type": "Array",
+        "metadata": {
+          "description": "The location that the resources is located.",
+          "strongType": "location",
+          "displayName": "Resource location"
+        }
+      }
+    },
+    "policyRule": {
+      "if": {
+        "allOf": [
+          {
+            "field": "type",
+            "equals": "microsoft.network/virtualNetworks"
+          },
+          {
+            "field": "location",
+            "in": "[parameters('Location')]"
+          }
+        ]
+      },
+      "then": {
+        "effect": "audit",
+        "details": {
+          "type": "microsoft.network/virtualNetworks",
+          "name": "[field('name')]",
+          "existenceCondition": {
+            "allOf": [
+              {
+                "field": "Microsoft.Network/virtualNetworks/enableDdosProtection",
+                "equals": "True"
+              },
+              {
+                "field": "Microsoft.Network/virtualNetworks/ddosProtectionPlan.id",
+                "equals": "[parameters('DDoSPlan')]"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}
